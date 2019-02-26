@@ -4,7 +4,7 @@
 #### Tasks:
 
 1. Create public repo (10 points): **Done.**
-
+   1. Create a Roster with each team members role
 2. Identify tools for mob programming/meetings/recording (20 points): **Done.** We're using Zoom. https://zoom.us/
 
 3. Complete the Gilded Rose Refactoring Kata (70 points):
