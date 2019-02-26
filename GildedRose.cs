@@ -4,14 +4,25 @@ namespace csharp
 {
     public class GildedRose
     {
+        private bool _hasBeenRunToday;
+
         IList<Item> Items;
-        public GildedRose(IList<Item> Items)
+        public GildedRose(IList<Item> Items, bool hasBeenRunToday)
         {
             this.Items = Items;
+            this._hasBeenRunToday = hasBeenRunToday;
         }
 
         public void UpdateQuality()
         {
+            if(this._hasBeenRunToday)
+            {
+                return;
+            }
+
+            // update my internal status that I have already updated the items
+            _hasBeenRunToday = true;
+
             for (var i = 0; i < Items.Count; i++)
             {
                 if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
