@@ -5,8 +5,10 @@
 
 1. Create public repo (10 points): **Done.**
    1. Create a Roster with each team members role
-2. Identify tools for mob programming/meetings/recording (20 points): **Done.** We're using Zoom. https://zoom.us/
-
+2. Identify tools for mob programming/meetings/recording (20 points): **Done.** 
+   1. We're using Zoom. https://zoom.us/ for mobbing
+   2. Visual Studio as our IDE for C#
+   3. Gitkraken for our Git client
 3. Complete the Gilded Rose Refactoring Kata (70 points):
    1. Add Gilded Rose code to your repo: **Done.** (Note: Team voted to complete grrkata in C#, 19 Feb 2019.)
    2. Mob with your teammates to add unit tests until it is safe to refactor the legacy code. To demonstrate that you worked as a mob, capture video of your session. Upload your video to YouTube. Document the URL of your video in your repo's README file.
