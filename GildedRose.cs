@@ -88,10 +88,12 @@ namespace csharp
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
+                        // smooth criminal refactor
+                        // the value of brie has already been incremented above
+                        //if (Items[i].Quality < 50)
+                        //{
+                        //    Items[i].Quality = Items[i].Quality + 1;
+                        //}
                     }
                 }
             }
