@@ -6,13 +6,17 @@ namespace csharp
     [TestFixture]
     public class GildedRoseTest
     {
+        // naming convention of each unit test is as follows:
+        // ClassUnderTest_Method_Objective_Outcome
+
         #region Sellin unit tests        
         /// <summary>
-        /// this unit test is for proving that the update of an item's sellin property
-        /// is properly updated at the end of the day. 
+        /// this unit test is for proving that the update of an item's Sellin property
+        /// is properly updated at the end of the day, and done only once no matter
+        /// how often the UpdateQuality() method is called
         /// </summary>
         [Test]
-        public void item_update_sellin_daily_has_been_run_success()
+        public void GildedRose_UpdateQuality_SellinForAllItemsGetsUpdatedOnceDaily_success()
         {
             // in the production situation, the value for 
             // hasBeenRunToday would be taken from some persisted medium like 
@@ -32,16 +36,17 @@ namespace csharp
             expectedSellIn = 9; // this is with the assumption that decrementing of Sellin of the
             // item is by 1
             Assert.AreEqual(expectedSellIn, Items[0].SellIn);
-        }        
+        }
         #endregion Sellin unit tests
 
         #region Quality Unit Tests
         /// <summary>
         /// this unit test is for proving that the update of an item's Quality property
-        /// is properly updated at the end of the day. 
+        /// is properly updated at the end of the day, and done only once no matter
+        /// how often the UpdateQuality() method is called
         /// </summary>
         [Test]
-        public void item_update_quality_daily_has_been_run_success()
+        public void GildedRose_UpdateQuality_QualityForAllItemsGetsUpdatedOnceDaily_success()
         {            
             // in the production situation, the value for 
             // hasBeenRunToday would be taken from some persisted medium like 
