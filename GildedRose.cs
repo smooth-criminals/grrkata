@@ -4,6 +4,46 @@ namespace csharp
 {
     public class GildedRose
     {
+        #region private helpers
+
+        /// <summary>
+        /// creates the proper IGrScItem based on the name of the item
+        /// </summary>
+        /// <param name="item">item</param>
+        /// <returns>IGrScItem</returns>
+        private IGrScItem GrScItemFactory(Item item)
+        {
+            if (string.IsNullOrEmpty(item.Name.Trim()))
+            {
+                return null;
+            }
+
+            string lowerItemName = item.Name.ToLower();
+            
+            if (lowerItemName.Contains("aged brie"))
+            {
+                return new AgedBrieItem(item);
+            }
+
+            if (lowerItemName.Contains("backstage passes"))
+            {
+                return new BackStageItem(item);
+            }
+
+            if (lowerItemName.Contains("sulfuras"))
+            {
+                return new SulfurusItem(item);
+            }
+
+            if (lowerItemName.Contains("conjured"))
+            {
+                return new ConjuredItem(item);
+            }
+
+            return new RegularItem(item);
+        }
+        #endregion private helper
+
         private bool _hasBeenRunToday;
 
         IList<Item> Items;
@@ -15,7 +55,11 @@ namespace csharp
 
         public void UpdateQuality()
         {
-            if(this._hasBeenRunToday)
+            // create an smooth criminal version of a gilded rose item
+            // through the smooth criminals gilded rose factory using the name of
+            // the item
+
+            if (this._hasBeenRunToday)
             {
                 return;
             }
@@ -25,78 +69,12 @@ namespace csharp
 
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    if (Items[i].Quality > 0)
-                    {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
-                    }
-                }
-                else
-                {
-                    if (Items[i].Quality < 50)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
-
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].SellIn < 11)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-
-                            if (Items[i].SellIn < 6)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    Items[i].SellIn = Items[i].SellIn - 1;
-                }
-
-                if (Items[i].SellIn < 0)
-                {
-                    if (Items[i].Name != "Aged Brie")
-                    {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].Quality > 0)
-                            {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                                {
-                                    Items[i].Quality = Items[i].Quality - 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
-                        }
-                    }
-                    else
-                    {
-                        // smooth criminal refactor
-                        // the value of brie has already been incremented above
-                        //if (Items[i].Quality < 50)
-                        //{
-                        //    Items[i].Quality = Items[i].Quality + 1;
-                        //}
-                    }
-                }
+                IGrScItem grScItem = GrScItemFactory(Items[i]);
+                grScItem.UpdateQuality();
+                Items[i].Quality = grScItem.Quality;
+                Items[i].SellIn = grScItem.Sellin;
             }
+            
         }
     }
 }
